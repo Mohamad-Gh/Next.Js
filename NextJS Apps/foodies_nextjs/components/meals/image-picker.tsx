@@ -13,18 +13,31 @@ export default function ImagePicker({ label, name }: ImagePickerProps) {
     imageRef.current?.click();
   };
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event?.target?.files?.[0] as File | null;
+  const handleImageChange = () => {
+    const file = imageRef.current?.files?.[0] as File | null;
 
     if (!file) return null;
+
     const fileReader = new FileReader();
 
     fileReader.onload = () => {
       setPickedImage(fileReader.result as string);
     };
-
     fileReader.readAsDataURL(file);
   };
+
+  // const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event?.target?.files?.[0] as File | null;
+
+  //   if (!file) return null;
+  //   const fileReader = new FileReader();
+
+  //   fileReader.onload = () => {
+  //     setPickedImage(fileReader.result as string);
+  //   };
+
+  //   fileReader.readAsDataURL(file);
+  // };
   return (
     <div className={classes.picker}>
       <label htmlFor={name}>{label}</label>
