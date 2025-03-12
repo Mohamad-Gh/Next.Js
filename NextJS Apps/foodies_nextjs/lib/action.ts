@@ -3,6 +3,10 @@
 import { redirect } from "next/navigation";
 import { saveMeal } from "./meals";
 
+const isInvalid = (text: string) => {
+  return !text || text.trim() === "";
+};
+
 export async function shareMeal(formData: FormData) {
   const title = formData.get("title");
   const summary = formData.get("summary");
@@ -23,6 +27,18 @@ export async function shareMeal(formData: FormData) {
     throw new Error(
       "Invalid form data: All fields are required and must be of the correct type"
     );
+  }
+
+  if (
+    isInvalid(title) ||
+    isInvalid(summary) ||
+    isInvalid(instructions) ||
+    isInvalid(creator) ||
+    isInvalid(creator_email) ||
+    !image ||
+    image.size === 0
+  ) {
+    throw new Error("Invalid inputs");
   }
 
   const meal = {

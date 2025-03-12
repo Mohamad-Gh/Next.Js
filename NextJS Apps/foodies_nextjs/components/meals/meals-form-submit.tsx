@@ -3,11 +3,11 @@
 import { useFormStatus } from "react-dom";
 
 export default function MealsFormSubmit() {
-  const status = useFormStatus();
+  const { pending } = useFormStatus();
 
   return (
-    <button type="submit" disabled={status.pending}>
-      {status.pending ? "Submitting..." : "Share Meal"}
+    <button type="submit" disabled={pending}>
+      {pending ? "Submitting..." : "Share Meal"}
     </button>
   );
 }
