@@ -27,7 +27,7 @@ export const getMeal = (slug: string): Meal => {
 };
 
 type MealInput = {
-  slug: string;
+  // slug: string;
   title: string;
   image: File;
   summary: string;
@@ -37,16 +37,20 @@ type MealInput = {
 };
 
 export const saveMeal = async (meal: MealInput) => {
-  meal.slug = slugify(meal.title);
+  const slug = slugify(meal.title);
   meal.instructions = xss(meal.instructions);
   const extension = meal.image.name.split(".").pop();
-  const fileName = `${meal.slug}.${extension}`;
+  const fileName = `${slug}.${extension}`;
   const stream = fs.createWriteStream(`public/images/${fileName}`);
   const bufferedImage = await meal.image.arrayBuffer();
   stream.write(Buffer.from(bufferedImage), (error) => {
     if (error) throw new Error("Failed to save the image");
   });
-  const newMeal = { ...meal, image: `/images/${fileName}` };
+  const newMeal = {
+    ...meal,
+    slug,
+    image: `/images/${fileName}`,
+  };
   db.prepare(
     `INSERT INTO meals (slug, title, image, summary, instructions, creator, creator_email) VALUES (
          @slug,
