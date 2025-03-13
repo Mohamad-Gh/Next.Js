@@ -53,6 +53,7 @@ export async function shareMeal(
   };
 
   saveMeal(meal);
-  revalidatePath("/meals", "layout");
+  // we can revalidate layout or page or even / path. we can add that using a , and layout.
+  revalidatePath("/meals");
   redirect("/meals");
 }
