@@ -5,12 +5,8 @@ import fs from "node:fs";
 
 const db = sql("meals.db");
 
-export const getMeals = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-  return db.prepare("SELECT * FROM meals").all();
-};
-
 type Meal = {
+  id: string;
   slug: string;
   title: string;
   image: string;
@@ -19,11 +15,15 @@ type Meal = {
   creator: string;
   creator_email: string;
 };
+export const getMeals = async (): Promise<Meal[]> => {
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+  return db.prepare("SELECT * FROM meals").all() as Meal[];
+};
 
 export const getMeal = (slug: string): Meal => {
   // await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  return db.prepare("SELECT * FROM meals WHERE slug=?").get(slug);
+  return db.prepare("SELECT * FROM meals WHERE slug=?").get(slug) as Meal;
 };
 
 type MealInput = {
