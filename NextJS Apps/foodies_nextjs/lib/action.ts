@@ -7,7 +7,10 @@ const isInvalid = (text: string) => {
   return !text || text.trim() === "";
 };
 
-export async function shareMeal(formData: FormData) {
+export async function shareMeal(
+  prevState: { message: string | null } | void,
+  formData: FormData
+): Promise<{ message: string | null } | void> {
   const title = formData.get("title");
   const summary = formData.get("summary");
   const instructions = formData.get("instructions");
@@ -24,9 +27,7 @@ export async function shareMeal(formData: FormData) {
     typeof creator !== "string" ||
     typeof creator_email !== "string"
   ) {
-    throw new Error(
-      "Invalid form data: All fields are required and must be of the correct type"
-    );
+    return { message: "Invalid inputs" };
   }
 
   if (
@@ -38,7 +39,7 @@ export async function shareMeal(formData: FormData) {
     !image ||
     image.size === 0
   ) {
-    throw new Error("Invalid inputs");
+    return { message: "Invalid inputs" };
   }
 
   const meal = {
