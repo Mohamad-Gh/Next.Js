@@ -7,9 +7,7 @@ function NavSearch() {
       type="search"
       placeholder="search a product ..."
       className="max-w-xs dark:bg-muted"
-    >
-      NavSearch
-    </Input>
+    />
   );
 }
 
