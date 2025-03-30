@@ -3,7 +3,7 @@ import db from "@/utils/db";
 export const fetchFeaturedProducts = async () => {
   const products = await db.product.findMany({
     where: { featured: true },
-    // select: { name: true },
+    // select: { name: true } gettin only name data,
   });
   return products;
 };
