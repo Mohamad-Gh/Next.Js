@@ -6,7 +6,9 @@ import { fetchSingleProduct } from "@/utils/actions";
 import { formatCurrency } from "@/utils/format";
 import Image from "next/image";
 
-async function SingleProductPage({ params }: { params: { id: string } }) {
+type SingleProductPageProps = { params: { id: string } };
+
+async function SingleProductPage({ params }: SingleProductPageProps) {
   const product = await fetchSingleProduct(params.id);
   const { name, image, company, description, price } = product;
   const dollarsAmount = formatCurrency(price);
