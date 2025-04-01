@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SignOutButton } from "@clerk/nextjs";
 import { toast } from "sonner";
 
-function SingOutLink() {
+function SignOutLink() {
   const handleSingOut = () => {
     toast("Loged out successfully");
   };
@@ -11,10 +11,10 @@ function SingOutLink() {
   return (
     <SignOutButton>
       <Link href={"/"} className="w-full text-left" onClick={handleSingOut}>
-        Sign Out
+        Log out
       </Link>
     </SignOutButton>
   );
 }
 
-export default SingOutLink;
+export default SignOutLink;
