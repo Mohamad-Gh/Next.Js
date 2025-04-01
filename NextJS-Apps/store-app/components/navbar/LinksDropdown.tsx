@@ -3,12 +3,13 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  // DropdownMenuSeparator,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { LuAlignLeft } from "react-icons/lu";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { links } from "@/utils/links";
+import SingOutLink from "./SingOutLink";
 
 function LinksDropdown() {
   return (
@@ -28,6 +29,10 @@ function LinksDropdown() {
             </DropdownMenuItem>
           );
         })}
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <SingOutLink />
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
